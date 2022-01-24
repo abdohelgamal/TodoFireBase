@@ -94,6 +94,24 @@ class Signup extends StatelessWidget {
                           ),
                         );
                       } else {
+                        // BlocProvider.of<FireBaseBloc>(context)
+                        //     .firebaseAuthInstance
+                        //     .verifyPhoneNumber(
+                        //         timeout: const Duration(seconds: 110),
+                        //         verificationCompleted:
+                        //             (PhoneAuthCredential credential) async {
+                        //           await BlocProvider.of<FireBaseBloc>(context)
+                        //               .firebaseAuthInstance
+                        //               .currentUser!
+                        //               .linkWithCredential(credential);
+                        //         },
+                        //         codeAutoRetrievalTimeout:
+                        //             (String verificationId) {},
+                        //         verificationFailed:
+                        //             (FirebaseAuthException error) {},
+                        //         codeSent: (String verificationId,
+                        //             int? forceResendingToken) {},
+                        //         phoneNumber: phone.text);
                         Navigator.pop(context);
                         Navigator.pushReplacement(context,
                             MaterialPageRoute(builder: (context) => Home()));

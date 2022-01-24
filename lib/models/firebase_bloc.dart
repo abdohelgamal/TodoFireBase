@@ -39,21 +39,7 @@ class FireBaseBloc extends Cubit {
         firebaseFirestoreInstance
             .collection('users')
             .doc(firebaseAuthInstance.currentUser!.uid)
-            .set({
-          'email': email,
-          'name': name,
-          'phone': phone,
-          'tasks': []
-        }).whenComplete(() async {
-          await firebaseAuthInstance.verifyPhoneNumber(
-            timeout: const Duration(minutes: 5),
-            phoneNumber: phone,
-            verificationCompleted: (PhoneAuthCredential credential) {},
-            verificationFailed: (FirebaseAuthException e) {},
-            codeSent: (String verificationId, int? resendToken) {},
-            codeAutoRetrievalTimeout: (String verificationId) {},
-          );
-        });
+            .set({'email': email, 'name': name, 'phone': phone, 'tasks': []});
       });
     } on FirebaseAuthException catch (error) {
       return error;

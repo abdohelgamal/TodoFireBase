@@ -10,8 +10,8 @@ class TodoBloc extends Cubit<List<Map<String, dynamic>>> {
     emit(todos);
   }
 
-  void getTasksFromFireBase(List<Map<String,dynamic>> newTasks){
-     todos = newTasks;
+  void getTasksFromFireBase(List<Map<String, dynamic>> newTasks) {
+    todos = newTasks;
     emit(todos);
   }
 

@@ -38,7 +38,6 @@ class Root extends StatelessWidget {
 }
 
 class MyApp extends StatelessWidget {
- 
   @override
   Widget build(BuildContext context) {
     Widget widget = SplashScreenView(

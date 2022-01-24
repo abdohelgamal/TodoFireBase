@@ -7,7 +7,7 @@ import 'package:todofirebase/views/view_todo.dart';
 class TasksList extends StatelessWidget {
   final Map todo;
   final int index;
-  TasksList(this.todo , this.index);
+  TasksList(this.todo, this.index);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class TasksList extends StatelessWidget {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           onTap: () {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => TodoView(todo,index)));
+                MaterialPageRoute(builder: (context) => TodoView(todo, index)));
           },
           tileColor: Colors.lightBlue.shade100,
           enabled: true,
@@ -58,9 +58,8 @@ class TasksList extends StatelessWidget {
                   splashColor: Colors.red,
                   radius: 10,
                   onTap: () {
-                    todoBloc
-                        .removeTodo(todo)
-                        .then((value) => BlocProvider.of<FireBaseBloc>(context)
+                    todoBloc.removeTodo(todo).then((value) =>
+                        BlocProvider.of<FireBaseBloc>(context)
                             .updateTasks(todoBloc.todos));
                     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                         content: Text('Task removed successfully'),
@@ -86,7 +85,7 @@ class TasksList extends StatelessWidget {
                     style: TextStyle(fontSize: 15, color: Colors.blue[800]),
                   ),
                   Text(
-                    todo['done'] ,
+                    todo['done'],
                     textAlign: TextAlign.end,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
