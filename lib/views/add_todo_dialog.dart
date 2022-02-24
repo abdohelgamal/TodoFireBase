@@ -76,7 +76,7 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
                                     maxLines: 1,
                                     style: const TextStyle(color: Colors.black),
                                   ),
-                                  value: todo['parenttask'],
+                                  value: todo['taskname'],
                                 ))
                           ],
                           onChanged: (String? parent) {

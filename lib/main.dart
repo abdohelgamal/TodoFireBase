@@ -16,7 +16,7 @@ void main() async {
           messagingSenderId: '754417275926',
           projectId: 'todofirebase-f3f30'));
 
-  runApp(Root());
+  runApp(const Root());
 }
 
 class Root extends StatelessWidget {

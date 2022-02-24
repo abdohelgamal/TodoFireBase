@@ -56,16 +56,16 @@ class Signup extends StatelessWidget {
                     labelText: 'Phone', hintText: 'Please enter your phone'),
                 keyboardType: TextInputType.phone,
               ),
-              TextField(
+              TextField(obscureText: true,
                 controller: password,
-                decoration: const InputDecoration(
+                decoration:  const InputDecoration(
                     labelText: 'Password',
                     hintText: 'Please enter your password'),
                 keyboardType: TextInputType.visiblePassword,
               ),
               ButtonComponent(
                   textShown: 'Signup',
-                  onTap: () {
+                  onTap: () {FocusScope.of(context).unfocus();
                     BlocProvider.of<FireBaseBloc>(context)
                         .registerUser(
                             email.text, name.text, phone.text, password.text)

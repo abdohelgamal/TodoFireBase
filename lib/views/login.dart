@@ -42,7 +42,7 @@ class Login extends StatelessWidget {
                     hintText: 'Please enter your Email address or phone'),
                 keyboardType: TextInputType.emailAddress,
               ),
-              TextField(
+              TextField(obscureText: true,
                 controller: password,
                 decoration: const InputDecoration(
                     labelText: 'Password',
@@ -51,7 +51,7 @@ class Login extends StatelessWidget {
               ),
               ButtonComponent(
                   textShown: 'Login',
-                  onTap: () {
+                  onTap: () {FocusScope.of(context).unfocus();
                     BlocProvider.of<FireBaseBloc>(context)
                         .loginUser(email.text, password.text)
                         .then((value) {

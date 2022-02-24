@@ -35,11 +35,11 @@ class FireBaseBloc extends Cubit {
     try {
       return await firebaseAuthInstance
           .createUserWithEmailAndPassword(email: email, password: password)
-          .whenComplete(() {
+          .whenComplete(() {if (firebaseAuthInstance.currentUser != null){
         firebaseFirestoreInstance
             .collection('users')
             .doc(firebaseAuthInstance.currentUser!.uid)
-            .set({'email': email, 'name': name, 'phone': phone, 'tasks': []});
+            .set({'email': email, 'name': name, 'phone': phone, 'tasks': []});}
       });
     } on FirebaseAuthException catch (error) {
       return error;
