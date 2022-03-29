@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class ButtonComponent extends StatelessWidget {
-  ButtonComponent({required this.textShown, required this.onTap}) : super();
+  const ButtonComponent(
+      {Key? key, required this.textShown, required this.onTap})
+      : super(key: key);
 
   final String textShown;
   final VoidCallback onTap;

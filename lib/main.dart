@@ -2,8 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:splash_screen_view/SplashScreenView.dart';
-import 'package:todofirebase/models/firebase_bloc.dart';
-import 'package:todofirebase/models/todo_bloc.dart';
+import 'package:todofirebase/controllers/firebase_bloc.dart';
+import 'package:todofirebase/controllers/todo_bloc.dart';
 import 'package:todofirebase/views/home.dart';
 import 'package:todofirebase/views/initial_interface.dart';
 
@@ -33,11 +33,13 @@ class Root extends StatelessWidget {
         create: (context) => FireBaseBloc(),
         lazy: false,
       )
-    ], child: MyApp());
+    ], child:const MyApp());
   }
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     Widget widget = SplashScreenView(
@@ -46,7 +48,7 @@ class MyApp extends StatelessWidget {
                   .firebaseAuthInstance
                   .currentUser ==
               null
-          ? InitialPage()
+          ? const InitialPage()
           : Home(),
       duration: 3000,
       text: 'Todo App',

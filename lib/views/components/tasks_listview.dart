@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todofirebase/models/firebase_bloc.dart';
-import 'package:todofirebase/models/todo_bloc.dart';
+import 'package:todofirebase/controllers/firebase_bloc.dart';
+import 'package:todofirebase/controllers/todo_bloc.dart';
 import 'package:todofirebase/views/view_todo.dart';
 
 class TasksList extends StatelessWidget {

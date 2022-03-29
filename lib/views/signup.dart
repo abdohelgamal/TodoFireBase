@@ -1,9 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todofirebase/models/firebase_bloc.dart';
-import 'package:todofirebase/views/button_component.dart';
-import 'package:todofirebase/views/home.dart';
+import 'package:todofirebase/controllers/firebase_bloc.dart';
+import 'package:todofirebase/views/components/button_component.dart';
+import 'package:todofirebase/views/components/custom_textfield.dart';
 
 class Signup extends StatelessWidget {
   TextEditingController name = TextEditingController();
@@ -37,86 +36,40 @@ class Signup extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              TextField(
+              CustomTextField(
                 controller: email,
-                decoration: const InputDecoration(
-                    labelText: 'Email',
-                    hintText: 'Please enter your Email address'),
-                keyboardType: TextInputType.emailAddress,
+                label: 'Email',
+                hint: 'Please enter your Email address',
+                type: TextInputType.emailAddress,
               ),
-              TextField(
+              CustomTextField(
                 controller: name,
-                decoration: const InputDecoration(
-                    labelText: 'Full Name',
-                    hintText: 'Please enter your full name'),
+                label: 'Full Name',
+                hint: 'Please enter your full name',
               ),
-              TextField(
+              CustomTextField(
                 controller: phone,
-                decoration: const InputDecoration(
-                    labelText: 'Phone', hintText: 'Please enter your phone'),
-                keyboardType: TextInputType.phone,
+                label: 'Phone',
+                hint: 'Please enter your phone',
+                type: TextInputType.phone,
               ),
-              TextField(obscureText: true,
+              CustomTextField(
+                obscure: true,
                 controller: password,
-                decoration:  const InputDecoration(
-                    labelText: 'Password',
-                    hintText: 'Please enter your password'),
-                keyboardType: TextInputType.visiblePassword,
+                label: 'Password',
+                hint: 'Please enter your password',
+                type: TextInputType.visiblePassword,
               ),
               ButtonComponent(
                   textShown: 'Signup',
-                  onTap: () {FocusScope.of(context).unfocus();
-                    BlocProvider.of<FireBaseBloc>(context)
-                        .registerUser(
-                            email.text, name.text, phone.text, password.text)
-                        .then((value) {
-                      if (value is FirebaseAuthException) {
-                        showDialog(
-                          context: context,
-                          builder: (context) => AlertDialog(
-                            title: Text('Error !',
-                                style: TextStyle(
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.red.shade600)),
-                            actions: [
-                              TextButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: const Text(
-                                    'Ok',
-                                  ))
-                            ],
-                            content: Text(value.message!,
-                                style: TextStyle(
-                                    fontSize: 18, color: Colors.red.shade600)),
-                          ),
-                        );
-                      } else {
-                        // BlocProvider.of<FireBaseBloc>(context)
-                        //     .firebaseAuthInstance
-                        //     .verifyPhoneNumber(
-                        //         timeout: const Duration(seconds: 110),
-                        //         verificationCompleted:
-                        //             (PhoneAuthCredential credential) async {
-                        //           await BlocProvider.of<FireBaseBloc>(context)
-                        //               .firebaseAuthInstance
-                        //               .currentUser!
-                        //               .linkWithCredential(credential);
-                        //         },
-                        //         codeAutoRetrievalTimeout:
-                        //             (String verificationId) {},
-                        //         verificationFailed:
-                        //             (FirebaseAuthException error) {},
-                        //         codeSent: (String verificationId,
-                        //             int? forceResendingToken) {},
-                        //         phoneNumber: phone.text);
-                        Navigator.pop(context);
-                        Navigator.pushReplacement(context,
-                            MaterialPageRoute(builder: (context) => Home()));
-                      }
-                    });
+                  onTap: () {
+                    FocusScope.of(context).unfocus();
+                    BlocProvider.of<FireBaseBloc>(context).registerUser(
+                        email.text,
+                        name.text,
+                        phone.text,
+                        password.text,
+                        context);
                   })
             ],
           ),

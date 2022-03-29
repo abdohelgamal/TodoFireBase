@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todofirebase/models/firebase_bloc.dart';
-import 'package:todofirebase/models/todo_bloc.dart';
+import 'package:todofirebase/controllers/firebase_bloc.dart';
+import 'package:todofirebase/controllers/todo_bloc.dart';
 import 'package:todofirebase/views/add_todo_dialog.dart';
 import 'package:todofirebase/views/initial_interface.dart';
-import 'package:todofirebase/views/tasks_listview.dart';
+import 'package:todofirebase/views/components/tasks_listview.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -78,9 +78,9 @@ class _HomeState extends State<Home> {
             builder: (context, state) {
               return Column(children: [
                 Container(
-                  margin: const EdgeInsets.fromLTRB(10, 40, 10, 10),
+                  margin: const EdgeInsets.fromLTRB(10, 0, 10, 10),
                   padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
-                  child: ListView.builder(
+                  child: ListView.builder(padding: const EdgeInsets.symmetric(vertical: 40),
                       physics: const BouncingScrollPhysics(),
                       shrinkWrap: true,
                       itemCount:

@@ -1,5 +1,5 @@
 import 'package:sqflite/sqflite.dart';
-import 'package:todofirebase/models/classes.dart';
+import 'package:todofirebase/models/todo_model.dart';
 
 class Dbcontroller {
   Dbcontroller(){

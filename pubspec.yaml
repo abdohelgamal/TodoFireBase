@@ -24,13 +24,14 @@ dependencies:
   flutter:
     sdk: flutter
   splash_screen_view: ^3.0.0
-  bloc: ^8.0.2
+  bloc: ^8.0.3
   flutter_bloc: ^8.0.1
   date_format: ^2.0.5
-  firebase_core: ^1.12.0
-  firebase_auth: ^3.3.7
-  cloud_firestore: ^3.1.8
+  firebase_core: ^1.13.1
+  firebase_auth: ^3.3.11
+  cloud_firestore: ^3.1.10
   sqflite: ^2.0.2
+  flutter_screenutil: ^5.3.1
 
 dev_dependencies:
   flutter_lints: ^1.0.4

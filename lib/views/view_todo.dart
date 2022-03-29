@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todofirebase/controllers/functions.dart';
-import 'package:todofirebase/models/firebase_bloc.dart';
-import 'package:todofirebase/models/todo_bloc.dart';
+import 'package:todofirebase/controllers/firebase_bloc.dart';
+import 'package:todofirebase/controllers/todo_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:date_format/date_format.dart';
 

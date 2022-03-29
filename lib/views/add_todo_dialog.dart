@@ -1,8 +1,9 @@
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todofirebase/models/firebase_bloc.dart';
-import 'package:todofirebase/models/todo_bloc.dart';
+import 'package:todofirebase/controllers/firebase_bloc.dart';
+import 'package:todofirebase/controllers/todo_bloc.dart';
+import 'package:todofirebase/views/components/select_parent_row.dart';
 
 class AddTodoDialog extends StatefulWidget {
   @override
@@ -10,10 +11,12 @@ class AddTodoDialog extends StatefulWidget {
 }
 
 class _AddTodoDialogState extends State<AddTodoDialog> {
-  String taskName = '';
-  String taskDesc = '';
+  TextEditingController taskName = TextEditingController();
+  TextEditingController taskDesc = TextEditingController();
   DateTime? date;
   String? parentTask;
+  void setParentTask(String? newVal)
+  {parentTask = newVal;}
 
   @override
   Widget build(BuildContext context) {
@@ -32,9 +35,9 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
                 const Text(
                   'Add New Task',
                   style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),
-                ),
+                ),SizedBox(height: 20,),
                 TextField(
-                  onChanged: (value) => taskName = value,
+                controller:taskName ,
                   decoration: InputDecoration(
                       hintText: 'Task Name',
                       border: OutlineInputBorder(
@@ -44,7 +47,7 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
                 ),
                 const SizedBox(height: 20),
                 TextField(
-                  onChanged: (value) => taskDesc = value,
+               controller: taskDesc,
                   decoration: InputDecoration(
                       hintText: 'Task Description',
                       border: OutlineInputBorder(
@@ -52,41 +55,7 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
                               const BorderSide(color: Colors.red, width: 0.5),
                           borderRadius: BorderRadius.circular(10))),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text('Parent Task'),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.45,
-                      child: DropdownButton<String?>(
-                          value: parentTask,
-                          items: [
-                            const DropdownMenuItem(
-                              alignment: Alignment.centerLeft,
-                              child: Text('No Parent Task'),
-                              value: null,
-                            ),
-                            ...bloc.todos.map((todo) => DropdownMenuItem(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text(
-                                    todo['taskname'].length >= 20
-                                        ? todo['taskname'].substring(0, 20)
-                                        : todo['taskname'],
-                                    overflow: TextOverflow.fade,
-                                    maxLines: 1,
-                                    style: const TextStyle(color: Colors.black),
-                                  ),
-                                  value: todo['taskname'],
-                                ))
-                          ],
-                          onChanged: (String? parent) {
-                            setState(() {
-                              parentTask = parent;
-                            });
-                          }),
-                    ),
-                  ],
-                ),
+                SelectParentRow(bloc.todos, parentTask,setParentTask),
                 if (date == null)
                   TextButton(
                       onPressed: () {
@@ -124,7 +93,7 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
                   children: [
                     ElevatedButton.icon(
                         onPressed: () {
-                          if (taskName.trim() == '' || taskDesc.trim() == '') {
+                          if (taskName.text.trim() == '' || taskDesc.text.trim() == '') {
                             ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
                                     content: Text(
@@ -133,8 +102,8 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
                           } else {
                             bloc
                                 .addNewTodo({
-                                  'taskname': taskName.trim(),
-                                  'taskdescription': taskDesc.trim(),
+                                  'taskname': taskName.text.trim(),
+                                  'taskdescription': taskDesc.text.trim(),
                                   'duedate': date == null
                                       ? 'No Date'
                                       : formatDate(
