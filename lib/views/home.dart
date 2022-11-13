@@ -7,6 +7,8 @@ import 'package:todofirebase/views/initial_interface.dart';
 import 'package:todofirebase/views/components/tasks_listview.dart';
 
 class Home extends StatefulWidget {
+  const Home({Key? key}) : super(key: key);
+
   @override
   State<Home> createState() => _HomeState();
 }
@@ -17,7 +19,6 @@ class _HomeState extends State<Home> {
   void initState() {
     todoBloc = BlocProvider.of<TodoBloc>(context);
     BlocProvider.of<FireBaseBloc>(context).getTasks().then((value) {
-      print(value.data());
       if (value.data()!['tasks'] != []) {
         for (Map<String, dynamic> task in value.data()!['tasks']) {
           todoBloc.addNewTodo(task);
@@ -42,7 +43,7 @@ class _HomeState extends State<Home> {
                       .whenComplete(() => Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => InitialPage())));
+                              builder: (context) => const InitialPage())));
                 },
                 icon: const Icon(Icons.logout))
           ],
@@ -67,7 +68,7 @@ class _HomeState extends State<Home> {
             showDialog(
                 context: context,
                 builder: (context) {
-                  return AddTodoDialog();
+                  return const AddTodoDialog();
                 });
           },
         ),
@@ -80,7 +81,8 @@ class _HomeState extends State<Home> {
                 Container(
                   margin: const EdgeInsets.fromLTRB(10, 0, 10, 10),
                   padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
-                  child: ListView.builder(padding: const EdgeInsets.symmetric(vertical: 40),
+                  child: ListView.builder(
+                      padding: const EdgeInsets.symmetric(vertical: 40),
                       physics: const BouncingScrollPhysics(),
                       shrinkWrap: true,
                       itemCount:

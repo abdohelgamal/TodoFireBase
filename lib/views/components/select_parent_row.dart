@@ -24,11 +24,12 @@ class _SelectParentRowState extends State<SelectParentRow> {
               items: [
                 const DropdownMenuItem(
                   alignment: Alignment.centerLeft,
-                  child: Text('No Parent Task'),
                   value: null,
+                  child: Text('No Parent Task'),
                 ),
                 ...widget.items.map((todo) => DropdownMenuItem(
                       alignment: Alignment.centerLeft,
+                      value: todo['taskname'],
                       child: Text(
                         todo['taskname'].length >= 20
                             ? todo['taskname'].substring(0, 20)
@@ -37,7 +38,6 @@ class _SelectParentRowState extends State<SelectParentRow> {
                         maxLines: 1,
                         style: const TextStyle(color: Colors.black),
                       ),
-                      value: todo['taskname'],
                     ))
               ],
               onChanged: (String? parent) {

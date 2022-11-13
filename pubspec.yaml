@@ -18,23 +18,24 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
+  sdk: ">=2.18.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
   splash_screen_view: ^3.0.0
-  bloc: ^8.0.3
-  flutter_bloc: ^8.0.1
-  date_format: ^2.0.5
-  firebase_core: ^1.13.1
-  firebase_auth: ^3.3.11
-  cloud_firestore: ^3.1.10
-  sqflite: ^2.0.2
-  flutter_screenutil: ^5.3.1
+  flutter_bloc: ^8.1.1
+  date_format: ^2.0.7
+  firebase_core: ^2.1.1
+  firebase_auth: ^4.1.1
+  cloud_firestore: ^4.0.4
+  sqflite: ^2.2.0+3
+  flutter_screenutil: ^5.6.0
+  firebase_messaging: ^14.0.4
+  awesome_notifications: ^0.7.4+1
 
 dev_dependencies:
-  flutter_lints: ^1.0.4
+  flutter_lints: ^2.0.1
   flutter_test:
     sdk: flutter
 

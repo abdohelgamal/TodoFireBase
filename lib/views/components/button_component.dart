@@ -14,12 +14,12 @@ class ButtonComponent extends StatelessWidget {
         width: MediaQuery.of(context).size.width * 0.4,
         child: OutlinedButton(
             onPressed: onTap,
-            child: Text(textShown,
-                style: TextStyle(color: Colors.grey[600], fontSize: 20)),
             style: ButtonStyle(
                 side: MaterialStateProperty.all(
                     const BorderSide(color: Colors.blue, width: 1.6)),
                 shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12))))));
+                    borderRadius: BorderRadius.circular(12)))),
+            child: Text(textShown,
+                style: TextStyle(color: Colors.grey[600], fontSize: 20))));
   }
 }

@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:date_format/date_format.dart';
 
 class TodoView extends StatefulWidget {
-  TodoView(this.todo, this.index);
+  TodoView(this.todo, this.index, {Key? key}) : super(key: key);
   Map todo;
   int index;
   @override
@@ -208,12 +208,13 @@ class _TodoViewState extends State<TodoView> {
                                 items: [
                                   const DropdownMenuItem(
                                     alignment: Alignment.centerLeft,
-                                    child: Text('No Parent Task'),
                                     value: 'No Parent Task',
+                                    child: Text('No Parent Task'),
                                   ),
                                   ...todoBloc.todos.map((todo) {
                                     return DropdownMenuItem<String>(
                                       alignment: Alignment.centerLeft,
+                                      value: todo['taskname'],
                                       child: Text(
                                         todo['taskname'].length >= 20
                                             ? todo['taskname'].substring(0, 20)
@@ -223,7 +224,6 @@ class _TodoViewState extends State<TodoView> {
                                         style: const TextStyle(
                                             color: Colors.black),
                                       ),
-                                      value: todo['taskname'],
                                     );
                                   }).toList()
                                     ..removeWhere(
@@ -240,7 +240,7 @@ class _TodoViewState extends State<TodoView> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          Text('Selected date is  : ' + newDate),
+                          Text('Selected date is  : $newDate'),
                           TextButton(
                               onPressed: () {
                                 if (newDate == 'No Date') {

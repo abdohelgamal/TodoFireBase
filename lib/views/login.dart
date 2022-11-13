@@ -1,14 +1,14 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todofirebase/controllers/firebase_bloc.dart';
 import 'package:todofirebase/views/components/button_component.dart';
 import 'package:todofirebase/views/components/custom_textfield.dart';
-import 'package:todofirebase/views/home.dart';
 
 class Login extends StatelessWidget {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
+
+  Login({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +18,7 @@ class Login extends StatelessWidget {
           titleTextStyle: const TextStyle(color: Colors.blue, fontSize: 25),
           backgroundColor: Colors.transparent,
           shadowColor: Colors.transparent,
+          elevation: 0,
           leading: IconButton(
               onPressed: () {
                 Navigator.pop(context);

@@ -10,6 +10,8 @@ class Signup extends StatelessWidget {
   TextEditingController password = TextEditingController();
   TextEditingController phone = TextEditingController();
 
+  Signup({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

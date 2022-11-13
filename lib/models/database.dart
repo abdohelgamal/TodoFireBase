@@ -2,14 +2,14 @@ import 'package:sqflite/sqflite.dart';
 import 'package:todofirebase/models/todo_model.dart';
 
 class Dbcontroller {
-  Dbcontroller(){
+  Dbcontroller() {
     createDataBase();
   }
   late Database database;
   String tableName = 'TestData';
   createDataBase() async {
     String databasesPath = await getDatabasesPath();
-    databasesPath = databasesPath + '/mydatabase.db';
+    databasesPath = '$databasesPath/mydatabase.db';
     await openDatabase(databasesPath, version: 1).then((data) {
       database = data;
       database.transaction((txn) async {
@@ -21,9 +21,9 @@ class Dbcontroller {
 
   void insertMultipleRecords(List<Map<String, dynamic>> list) {
     Batch batch = database.batch();
-    list.forEach((element) {
+    for (var element in list) {
       batch.insert(tableName, element);
-    });
+    }
     batch.commit();
   }
 

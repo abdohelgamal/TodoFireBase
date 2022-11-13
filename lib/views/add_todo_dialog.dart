@@ -1,11 +1,15 @@
 import 'package:date_format/date_format.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todofirebase/controllers/firebase_bloc.dart';
 import 'package:todofirebase/controllers/todo_bloc.dart';
+import 'package:todofirebase/models/notification.dart';
 import 'package:todofirebase/views/components/select_parent_row.dart';
 
 class AddTodoDialog extends StatefulWidget {
+  const AddTodoDialog({Key? key}) : super(key: key);
+
   @override
   State<AddTodoDialog> createState() => _AddTodoDialogState();
 }
@@ -15,8 +19,9 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
   TextEditingController taskDesc = TextEditingController();
   DateTime? date;
   String? parentTask;
-  void setParentTask(String? newVal)
-  {parentTask = newVal;}
+  void setParentTask(String? newVal) {
+    parentTask = newVal;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,20 +29,22 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       alignment: Alignment.center,
-      child: Container(
-          height: MediaQuery.of(context).size.height * 0.4,
+      child: SingleChildScrollView(
           padding: const EdgeInsets.all(20),
           child: Column(
-              mainAxisSize: MainAxisSize.max,
+              mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 const Text(
                   'Add New Task',
                   style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),
-                ),SizedBox(height: 20,),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
                 TextField(
-                controller:taskName ,
+                  controller: taskName,
                   decoration: InputDecoration(
                       hintText: 'Task Name',
                       border: OutlineInputBorder(
@@ -47,7 +54,7 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
                 ),
                 const SizedBox(height: 20),
                 TextField(
-               controller: taskDesc,
+                  controller: taskDesc,
                   decoration: InputDecoration(
                       hintText: 'Task Description',
                       border: OutlineInputBorder(
@@ -55,7 +62,7 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
                               const BorderSide(color: Colors.red, width: 0.5),
                           borderRadius: BorderRadius.circular(10))),
                 ),
-                SelectParentRow(bloc.todos, parentTask,setParentTask),
+                SelectParentRow(bloc.todos, parentTask, setParentTask),
                 if (date == null)
                   TextButton(
                       onPressed: () {
@@ -77,8 +84,13 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Text('Selected date is  : ' +
-                          formatDate(date!, [yyyy, '-', mm, '-', dd])),
+                      Text('Selected date is  : ${formatDate(date!, [
+                            yyyy,
+                            '-',
+                            mm,
+                            '-',
+                            dd
+                          ])}'),
                       TextButton(
                           onPressed: () {
                             setState(() {
@@ -93,7 +105,8 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
                   children: [
                     ElevatedButton.icon(
                         onPressed: () {
-                          if (taskName.text.trim() == '' || taskDesc.text.trim() == '') {
+                          if (taskName.text.trim() == '' ||
+                              taskDesc.text.trim() == '') {
                             ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
                                     content: Text(
@@ -117,13 +130,19 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
                                     BlocProvider.of<FireBaseBloc>(context)
                                         .updateTasks(bloc.todos))
                                 .whenComplete(() => Navigator.pop(context))
-                                .whenComplete(() =>
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                        const SnackBar(
-                                            content:
-                                                Text('Task added successfully'),
-                                            duration:
-                                                Duration(milliseconds: 850))));
+                                .whenComplete(() {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                          content:
+                                              Text('Task added successfully'),
+                                          duration:
+                                              Duration(milliseconds: 850)));
+                                 NotificationController.showFlutterNotification(const RemoteMessage(
+                                      notification:
+                                          RemoteNotification(android: AndroidNotification(priority: AndroidNotificationPriority.maximumPriority),
+                                            title: 'gfgdf',
+                                            body: 'fghhg')));
+                                });
                           }
                         },
                         icon: const Icon(Icons.add),

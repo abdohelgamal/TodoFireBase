@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class TransparentAppBar extends AppBar {
- BuildContext ctx;
+  BuildContext ctx;
   String text;
 
-  TransparentAppBar(this.text,this.ctx,{Key? key}) : super(key: key);
+  TransparentAppBar(this.text, this.ctx, {Key? key}) : super(key: key);
 
   Widget build(ctx) {
     return AppBar(
@@ -20,6 +20,4 @@ class TransparentAppBar extends AppBar {
               size: 30, color: Colors.blue)),
     );
   }
-
- 
 }
